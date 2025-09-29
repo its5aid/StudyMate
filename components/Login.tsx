@@ -134,21 +134,21 @@ const Login: React.FC = () => {
                   <>
                     <div className="mb-4">
                         <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="name">{t('login.name')}</label>
-                        <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="name" type="text" placeholder={t('login.name.placeholder')} value={name} onChange={(e) => setName(e.target.value)} required />
+                        <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="name" type="text" placeholder={t('login.name.placeholder')} value={name} onChange={(e) => setName(e.target.value)} required />
                     </div>
                     <div className="mb-4">
                         <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="major">{t('login.major')}</label>
-                        <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="major" type="text" placeholder={t('login.major.placeholder')} value={major} onChange={(e) => setMajor(e.target.value)} />
+                        <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="major" type="text" placeholder={t('login.major.placeholder')} value={major} onChange={(e) => setMajor(e.target.value)} />
                     </div>
                   </>
                 )}
                 <div className="mb-4">
                     <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="email">{t('login.email')}</label>
-                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="email" type="email" placeholder={t('login.email.placeholder')} value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="email" type="email" placeholder={t('login.email.placeholder')} value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div className="mb-6">
                     <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="password">{t('login.password')}</label>
-                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="password" type="password" placeholder={t('login.password.placeholder')} value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="password" type="password" placeholder={t('login.password.placeholder')} value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 {view === 'login' && <button type="button" onClick={() => handleViewChange('forgotPassword')} className="text-sm text-indigo-600 hover:text-indigo-500 mb-4 float-right rtl:float-left">{t('login.forgotPasswordLink')}</button>}
                 <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300 transform active:scale-95" type="submit">{view === 'login' ? t('login.button.login') : t('login.button.signup')}</button>
@@ -166,7 +166,7 @@ const Login: React.FC = () => {
                  {renderMessages()}
                 <div className="mb-4">
                     <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="email-forgot">{t('login.email')}</label>
-                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="email-forgot" type="email" placeholder={t('login.email.placeholder')} value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="email-forgot" type="email" placeholder={t('login.email.placeholder')} value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300 transform active:scale-95 mt-4" type="submit">{t('login.button.sendCode')}</button>
                  <p className="text-center text-sm text-slate-500 mt-6">
@@ -182,15 +182,15 @@ const Login: React.FC = () => {
                  {renderMessages()}
                 <div className="mb-4">
                     <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="code">{t('login.verificationCode')}</label>
-                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="code" type="text" placeholder={t('login.verificationCode.placeholder')} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} required />
+                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="code" type="text" placeholder={t('login.verificationCode.placeholder')} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} required />
                 </div>
                 <div className="mb-4">
                     <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="new-password">{t('login.newPassword')}</label>
-                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="new-password" type="password" placeholder={t('login.password.placeholder')} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="new-password" type="password" placeholder={t('login.password.placeholder')} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
                 </div>
                  <div className="mb-6">
                     <label className="block text-slate-600 text-sm font-medium mb-2" htmlFor="confirm-password">{t('login.confirmPassword')}</label>
-                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="confirm-password" type="password" placeholder={t('login.password.placeholder')} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                    <input className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" id="confirm-password" type="password" placeholder={t('login.password.placeholder')} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
                 </div>
                 <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300 transform active:scale-95" type="submit">{t('login.button.changePassword')}</button>
             </form>

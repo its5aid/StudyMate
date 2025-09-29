@@ -1,6 +1,6 @@
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BookMarked, ChevronLeft, LogOut } from 'lucide-react';
 import { Page, Feature } from '../types';
 import { useApp } from '../context/AppContext';
@@ -25,18 +25,6 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ navItems, profileItem, activeItem, setActiveItem, isSidebarOpen, setIsSidebarOpen, logout }) => {
     const [isExpanded, setIsExpanded] = useState(true);
     const { t } = useApp();
-
-  // Effect to handle body scroll lock when mobile sidebar is open
-  useEffect(() => {
-    if (isSidebarOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isSidebarOpen]);
 
   const NavLink: React.FC<{ item: NavItem, isButton?: boolean, onClick?: () => void }> = ({ item, isButton = true, onClick }) => {
     const isActive = activeItem === item.id;
@@ -70,6 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ navItems, profileItem, activeItem, se
       ></div>
 
       <aside className={`fixed lg:relative z-40 flex flex-col bg-white shadow-lg transition-all duration-300 ease-in-out h-full
+        right-0 lg:right-auto
         ${isExpanded ? 'w-64' : 'w-20'}
         ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
       `}>

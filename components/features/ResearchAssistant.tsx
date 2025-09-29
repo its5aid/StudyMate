@@ -1,8 +1,8 @@
 
+
 import React, { useState } from 'react';
 import { getResearchSources } from '../../services/geminiService';
 import { ResearchSource } from '../../types';
-import FeatureWrapper from '../common/FeatureWrapper';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { Search, Link as LinkIcon } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
@@ -38,10 +38,7 @@ const ResearchAssistant: React.FC = () => {
   };
 
   return (
-    <FeatureWrapper
-      title={t('feature.researchAssistant.title')}
-      description={t('feature.researchAssistant.description')}
-    >
+    <div className="max-w-4xl mx-auto animate-fade-in-up">
       <div className="bg-white rounded-xl shadow-md p-8">
         <div className="relative">
           <input
@@ -97,7 +94,7 @@ const ResearchAssistant: React.FC = () => {
           )}
         </div>
       )}
-    </FeatureWrapper>
+    </div>
   );
 };
 

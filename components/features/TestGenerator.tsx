@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { generateTest } from '../../services/geminiService';
 import { QuizQuestion, QuestionType, MCQQuestion } from '../../types';
-import FeatureWrapper from '../common/FeatureWrapper';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { ClipboardList, UploadCloud, FileText, X } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
@@ -111,10 +110,7 @@ const TestGenerator: React.FC = () => {
   }
 
   return (
-    <FeatureWrapper
-      title={t('feature.testGenerator.title')}
-      description={t('feature.testGenerator.description', { fileTypes: SUPPORTED_TYPES_STRING })}
-    >
+    <div className="max-w-4xl mx-auto animate-fade-in-up">
       <div className="bg-white rounded-xl shadow-md p-8">
         {!file ? (
             <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer bg-slate-50 hover:bg-slate-100 transition">
@@ -200,7 +196,7 @@ const TestGenerator: React.FC = () => {
             </div>
         </div>
       )}
-    </FeatureWrapper>
+    </div>
   );
 };
 

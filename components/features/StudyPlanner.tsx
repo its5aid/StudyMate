@@ -1,8 +1,8 @@
 
+
 import React, { useState } from 'react';
 import { generateStudyPlan } from '../../services/geminiService';
 import { StudyPlan } from '../../types';
-import FeatureWrapper from '../common/FeatureWrapper';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { CalendarClock, Plus, X } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
@@ -54,10 +54,7 @@ const StudyPlanner: React.FC = () => {
   };
 
   return (
-    <FeatureWrapper
-      title={t('feature.studyPlanner.title')}
-      description={t('feature.studyPlanner.description')}
-    >
+    <div className="max-w-4xl mx-auto animate-fade-in-up">
       <div className="bg-white rounded-xl shadow-md p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -142,7 +139,7 @@ const StudyPlanner: React.FC = () => {
           </div>
         </div>
       )}
-    </FeatureWrapper>
+    </div>
   );
 };
 

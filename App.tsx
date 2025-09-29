@@ -38,6 +38,20 @@ const App: React.FC = () => {
     }
     setIsSidebarOpen(false); // Close sidebar on navigation
   }
+  
+  const getTitle = () => {
+    if (currentPage === 'profile') {
+      return profileItem.name;
+    }
+    const featureTitles: Record<Feature, string> = {
+      'ai-assistant': t('feature.aiAssistant.title'),
+      'summarizer': t('feature.summarizer.title'),
+      'test-generator': t('feature.testGenerator.title'),
+      'study-planner': t('feature.studyPlanner.title'),
+      'research-assistant': t('feature.researchAssistant.title'),
+    };
+    return featureTitles[activeFeature] ?? t('appName');
+  };
 
   return (
     <div className="flex h-screen bg-slate-100 font-sans text-slate-800">
@@ -51,8 +65,8 @@ const App: React.FC = () => {
         logout={logout}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Header onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-slate-100 p-4 sm:p-6 md:p-8">
+        <Header onMenuClick={() => setIsSidebarOpen(true)} title={getTitle()} />
+        <main className="flex-1 bg-slate-100 p-4 sm:p-6 md:p-8 flex flex-col overflow-y-auto">
           {currentPage === 'dashboard' && <Dashboard activeFeature={activeFeature} />}
           {currentPage === 'profile' && <Profile />}
         </main>

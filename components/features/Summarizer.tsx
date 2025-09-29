@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { generateSummaryAndFlashcards } from '../../services/geminiService';
 import { SummaryResult } from '../../types';
-import FeatureWrapper from '../common/FeatureWrapper';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { UploadCloud, Zap, FileText, X } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
@@ -91,10 +90,7 @@ const Summarizer: React.FC = () => {
   }
 
   return (
-    <FeatureWrapper
-      title={t('feature.summarizer.title')}
-      description={t('feature.summarizer.description', { fileTypes: SUPPORTED_TYPES_STRING })}
-    >
+    <div className="max-w-4xl mx-auto animate-fade-in-up">
       <div className="bg-white rounded-xl shadow-md p-8">
         {!file ? (
             <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer bg-slate-50 hover:bg-slate-100 transition">
@@ -182,7 +178,7 @@ const Summarizer: React.FC = () => {
             )}
         </div>
       )}
-    </FeatureWrapper>
+    </div>
   );
 };
 

@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, User, BrainCircuit, Paperclip, X } from 'lucide-react';
 import { getChatResponse } from '../../services/geminiService';
 import { ChatMessage } from '../../types';
-import FeatureWrapper from '../common/FeatureWrapper';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useApp } from '../../context/AppContext';
 
@@ -65,11 +64,8 @@ const AiAssistant: React.FC = () => {
   };
 
   return (
-    <FeatureWrapper
-      title={t('feature.aiAssistant.title')}
-      description={t('feature.aiAssistant.description')}
-    >
-      <div className="bg-white rounded-xl shadow-md flex flex-col h-[calc(100vh-16rem)] max-h-[700px]">
+    <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full animate-fade-in-up">
+      <div className="bg-white rounded-xl shadow-md flex flex-col flex-1">
         <div className="flex-1 p-6 overflow-y-auto space-y-6">
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full text-center text-slate-400">
@@ -106,7 +102,7 @@ const AiAssistant: React.FC = () => {
           )}
           <div ref={chatEndRef} />
         </div>
-        <div className="p-4 border-t border-slate-200">
+        <div className="p-4 border-t border-slate-200 flex-shrink-0">
           {fileError && (
             <p className="text-red-500 text-sm mb-2 text-center">{fileError}</p>
           )}
@@ -118,7 +114,7 @@ const AiAssistant: React.FC = () => {
                 </button>
             </div>
           )}
-          <form onSubmit={handleSendMessage} className="relative flex items-center gap-2">
+          <form onSubmit={handleSendMessage} className="flex items-center gap-2">
             <input
               ref={fileInputRef}
               type="file"
@@ -139,12 +135,12 @@ const AiAssistant: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t('feature.aiAssistant.placeholder')}
-              className="w-full bg-slate-100 rounded-full py-3 pr-6 pl-12 rtl:pr-12 rtl:pl-6 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-slate-100 rounded-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               disabled={isLoading}
             />
             <button
               type="submit"
-              className="absolute left-12 rtl:left-auto rtl:right-12 top-1/2 -translate-y-1/2 bg-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-indigo-700 disabled:bg-indigo-300 transition-all duration-200 transform active:scale-95"
+              className="flex-shrink-0 bg-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-indigo-700 disabled:bg-indigo-300 transition-all duration-200 transform active:scale-95"
               disabled={isLoading || (!input.trim() && !attachedFile)}
             >
               <Send size={20} />
@@ -152,7 +148,7 @@ const AiAssistant: React.FC = () => {
           </form>
         </div>
       </div>
-    </FeatureWrapper>
+    </div>
   );
 };
 
