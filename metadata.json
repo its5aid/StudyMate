@@ -1,0 +1,5 @@
+{
+  "name": "StudyMate",
+  "description": "An AI-powered web application designed to assist university students with their studies, featuring an academic AI assistant, lecture summarizer, test generator, smart study planner, and research assistant.",
+  "requestFramePermissions": []
+}

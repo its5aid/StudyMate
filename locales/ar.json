@@ -1,0 +1,119 @@
+
+{
+  "appName": "StudyMate",
+  "appSlogan": "مساعدك الدراسي الذكي",
+  "login.title": "تسجيل الدخول",
+  "signup.title": "إنشاء حساب جديد",
+  "forgotPassword.title": "إعادة تعيين كلمة المرور",
+  "forgotPassword.prompt": "أدخل بريدك الإلكتروني المسجل لإرسال رمز التأكيد.",
+  "resetPassword.title": "إدخال كلمة المرور الجديدة",
+  "login.name": "الاسم",
+  "login.name.placeholder": "ادخل اسمك",
+  "login.major": "التخصص الدراسي",
+  "login.major.placeholder": "مثال: علوم الحاسب",
+  "login.email": "البريد الإلكتروني",
+  "login.email.placeholder": "example@email.com",
+  "login.password": "كلمة المرور",
+  "login.password.placeholder": "********",
+  "login.newPassword": "كلمة المرور الجديدة",
+  "login.confirmPassword": "تأكيد كلمة المرور",
+  "login.verificationCode": "رمز التأكيد",
+  "login.verificationCode.placeholder": "ادخل الرمز",
+  "login.button.login": "تسجيل الدخول",
+  "login.button.signup": "إنشاء حساب",
+  "login.button.sendCode": "إرسال الرمز",
+  "login.button.changePassword": "تغيير كلمة المرور",
+  "login.forgotPasswordLink": "هل نسيت كلمة المرور؟",
+  "login.noAccount": "ليس لديك حساب؟",
+  "login.noAccount.link": "أنشئ حساباً",
+  "login.hasAccount": "لديك حساب بالفعل؟",
+  "login.hasAccount.link": "سجّل الدخول",
+  "login.rememberedPassword": "تذكرت كلمة المرور؟",
+  "login.rememberedPassword.link": "العودة لتسجيل الدخول",
+  "login.disclaimer": "سيتم حفظ جميع بياناتك وملفاتك بشكل آمن في حسابك الشخصي.",
+  "login.error.emailExists": "هذا البريد الإلكتروني مسجل بالفعل.",
+  "login.error.invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+  "login.error.emailNotFound": "هذا البريد الإلكتروني غير مسجل.",
+  "login.error.codeIncorrect": "رمز التأكيد غير صحيح.",
+  "login.error.passwordMismatch": "كلمتا المرور غير متطابقتين.",
+  "login.error.passwordLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+  "login.error.unexpected": "حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى.",
+  "login.success.passwordReset": "تم تغيير كلمة المرور بنجاح.",
+  "login.success.codeSent.simulated": "لأغراض العرض، رمز استعادة كلمة المرور الخاص بك هو: {code}. الرجاء إدخاله أدناه.",
+  "sidebar.academicAssistant": "المساعد الأكاديمي",
+  "sidebar.summarizer": "ملخص المحاضرات",
+  "sidebar.testGenerator": "مولد الاختبارات",
+  "sidebar.studyPlanner": "منظم الدراسة",
+  "sidebar.researchAssistant": "مساعد البحث",
+  "sidebar.profile": "الملف الشخصي",
+  "sidebar.logout": "تسجيل الخروج",
+  "header.search": "ابحث...",
+  "profile.pageTitle": "الملف الشخصي للمستخدم",
+  "profile.activitySummary": "ملخص النشاط",
+  "profile.uploadedFiles": "الملفات المرفوعة",
+  "profile.studyPlans": "خطط دراسية",
+  "profile.testsGenerated": "اختبارات تم إنشاؤها",
+  "profile.recentFiles": "أحدث الملفات",
+  "profile.noFiles": "لا توجد ملفات بعد.",
+  "profile.recentPlans": "أحدث الخطط الدراسية",
+  "profile.noPlans": "لم يتم إنشاء خطط بعد.",
+  "profile.loading": "جاري تحميل الملف الشخصي...",
+  "profile.languageSettings": "إعدادات اللغة",
+  "profile.language.ar": "العربية",
+  "profile.language.en": "English",
+  "profile.major": "التخصص الدراسي",
+  "profile.edit": "تعديل",
+  "profile.save": "حفظ",
+  "profile.cancel": "إلغاء",
+  "profile.noMajor": "لم يتم تحديد التخصص",
+  "feature.aiAssistant.title": "🧠 المساعد الأكاديمي",
+  "feature.aiAssistant.description": "اطرح سؤالاً، أو ارفق ملفاً واسأل عن محتواه للحصول على إجابات دقيقة.",
+  "feature.aiAssistant.startConversation": "ابدأ المحادثة بطرح سؤالك الأول.",
+  "feature.aiAssistant.placeholder": "اكتب سؤالك هنا...",
+  "feature.aiAssistant.attachedFile": "الملف المرفق:",
+  "feature.aiAssistant.fileError": "نوع الملف غير مدعوم. الرجاء رفع ملف من الأنواع التالية: PDF, TXT, JPG, PNG.",
+  "feature.aiAssistant.error.generic": "عفواً، حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+  "feature.summarizer.title": "📚 ملخّص المحاضرات",
+  "feature.summarizer.description": "ارفع ملفاتك ({fileTypes}) للحصول على ملخص شامل وبطاقات فلاش للمذاكرة.",
+  "feature.summarizer.upload.click": "انقر للرفع",
+  "feature.summarizer.upload.drag": "أو اسحب الملف وأفلته",
+  "feature.summarizer.button.loading": "جاري التحليل...",
+  "feature.summarizer.button.generate": "أنشئ الملخص",
+  "feature.summarizer.error.noFile": "الرجاء رفع ملف أولاً.",
+  "feature.summarizer.error.generationFailed": "لم نتمكن من إنشاء الملخص. الرجاء المحاولة مرة أخرى.",
+  "feature.summarizer.error.unsupported": "نوع الملف غير مدعوم. الرجاء رفع أحد الأنواع التالية: {fileTypes}",
+  "feature.summarizer.error.unexpected": "حدث خطأ غير متوقع.",
+  "feature.summarizer.tab.summary": "الملخص",
+  "feature.summarizer.tab.flashcards": "بطاقات المذاكرة ({count})",
+  "feature.summarizer.summaryTitle": "الملخص الشامل",
+  "feature.testGenerator.title": "✏️ توليد الاختبارات",
+  "feature.testGenerator.description": "ارفع ملف المادة الدراسية ({fileTypes}) لإنشاء اختبارات تدريبية تلقائية.",
+  "feature.testGenerator.button.loading": "جاري الإنشاء...",
+  "feature.testGenerator.button.generate": "أنشئ الاختبار",
+  "feature.testGenerator.error.noFile": "الرجاء رفع ملف المادة أولاً.",
+  "feature.testGenerator.error.generationFailed": "لم نتمكن من إنشاء الاختبار. الرجاء المحاولة مرة أخرى.",
+  "feature.testGenerator.quizTitle": "الاختبار التدريبي",
+  "feature.testGenerator.essayPlaceholder": "اكتب إجابتك هنا...",
+  "feature.testGenerator.retry": "أعد المحاولة",
+  "feature.testGenerator.showResults": "عرض النتائج",
+  "feature.testGenerator.correctAnswer": "الإجابة الصحيحة:",
+  "feature.studyPlanner.title": "📆 منظّم الدراسة الذكي",
+  "feature.studyPlanner.description": "أخبرنا بموادك ووقتك المتاح، وسنقوم بإنشاء خطة دراسية مخصصة لك.",
+  "feature.studyPlanner.subjects": "المواد الدراسية",
+  "feature.studyPlanner.subjectPlaceholder": "المادة {number}",
+  "feature.studyPlanner.addSubject": "إضافة مادة أخرى",
+  "feature.studyPlanner.availableTime": "الوقت المتاح للدراسة",
+  "feature.studyPlanner.timePlaceholder": "مثال: ساعتان يومياً، عطلة نهاية الأسبوع",
+  "feature.studyPlanner.button.loading": "جاري التخطيط...",
+  "feature.studyPlanner.button.generate": "أنشئ الخطة",
+  "feature.studyPlanner.error.noInput": "الرجاء إدخال المواد الدراسية والوقت المتاح.",
+  "feature.studyPlanner.error.generationFailed": "لم نتمكن من إنشاء الخطة. الرجاء المحاولة مرة أخرى.",
+  "feature.studyPlanner.planTitle": "خطتك الدراسية الأسبوعية",
+  "feature.researchAssistant.title": "🔍 مساعد البحث",
+  "feature.researchAssistant.description": "اكتب موضوع بحثك واحصل على ملخص ومصادر ومراجع أكاديمية موثوقة.",
+  "feature.researchAssistant.placeholder": "مثال: تأثير الذكاء الاصطناعي على سوق العمل",
+  "feature.researchAssistant.error.noTopic": "الرجاء إدخال موضوع البحث.",
+  "feature.researchAssistant.error.notFound": "لم نتمكن من العثور على مصادر. الرجاء المحاولة مرة أخرى.",
+  "feature.researchAssistant.summaryTitle": "ملخص حول الموضوع",
+  "feature.researchAssistant.sourcesTitle": "مصادر مقترحة"
+}
