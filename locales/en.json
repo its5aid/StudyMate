@@ -115,5 +115,9 @@
   "feature.researchAssistant.error.noTopic": "Please enter a research topic.",
   "feature.researchAssistant.error.notFound": "We could not find sources. Please try again.",
   "feature.researchAssistant.summaryTitle": "Summary on the Topic",
-  "feature.researchAssistant.sourcesTitle": "Suggested Sources"
+  "feature.researchAssistant.sourcesTitle": "Suggested Sources",
+  "feature.upload.status.uploading": "Processing file: {fileName}...",
+  "feature.upload.status.success": "File processed successfully!",
+  "feature.upload.status.generating": "Generating results with AI...",
+  "feature.upload.status.error": "File processing failed."
 }

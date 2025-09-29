@@ -115,5 +115,9 @@
   "feature.researchAssistant.error.noTopic": "الرجاء إدخال موضوع البحث.",
   "feature.researchAssistant.error.notFound": "لم نتمكن من العثور على مصادر. الرجاء المحاولة مرة أخرى.",
   "feature.researchAssistant.summaryTitle": "ملخص حول الموضوع",
-  "feature.researchAssistant.sourcesTitle": "مصادر مقترحة"
+  "feature.researchAssistant.sourcesTitle": "مصادر مقترحة",
+  "feature.upload.status.uploading": "جاري معالجة الملف: {fileName}...",
+  "feature.upload.status.success": "تمت معالجة الملف بنجاح!",
+  "feature.upload.status.generating": "جاري إنشاء النتائج بواسطة الذكاء الاصطناعي...",
+  "feature.upload.status.error": "فشلت معالجة الملف."
 }

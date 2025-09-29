@@ -16,21 +16,42 @@ const ai = new GoogleGenAI({ apiKey: API_KEY });
 const generativeModel = 'gemini-2.5-flash';
 
 
-const fileToGenerativePart = async (file: File): Promise<Part> => {
-    const base64EncodedData = await new Promise<string>((resolve, reject) => {
+const fileToGenerativePart = async (file: File, onProgress: (progress: number) => void): Promise<Part> => {
+    return new Promise<Part>((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve((reader.result as string).split(',')[1]);
-        reader.onerror = (error) => reject(error);
+
+        reader.onprogress = (event) => {
+            if (event.lengthComputable) {
+                // Go up to 99% during reading, 100% is reserved for onload
+                const progress = Math.round((event.loaded / event.total) * 99);
+                onProgress(progress);
+            }
+        };
+
+        reader.onload = () => {
+            onProgress(100);
+            try {
+                const base64EncodedData = (reader.result as string).split(',')[1];
+                resolve({
+                    inlineData: {
+                        data: base64EncodedData,
+                        mimeType: file.type,
+                    },
+                });
+            } catch (error) {
+                reject(error);
+            }
+        };
+
+        reader.onerror = (error) => {
+            onProgress(0); // Reset progress on error
+            reject(error);
+        };
+        
+        onProgress(0); // Start progress at 0
         reader.readAsDataURL(file);
     });
-
-    return {
-        inlineData: {
-            data: base64EncodedData,
-            mimeType: file.type,
-        },
-    };
-}
+};
 
 
 // --- Academic AI Assistant ---
@@ -44,7 +65,8 @@ export const getChatResponse = async (history: ChatMessage[], message: string, f
     
     const userParts: Part[] = [{ text: message }];
     if (file) {
-        const filePart = await fileToGenerativePart(file);
+        // AI Assistant doesn't need a progress bar for now, so we pass a dummy function.
+        const filePart = await fileToGenerativePart(file, () => {});
         userParts.push(filePart);
     }
     
@@ -61,8 +83,8 @@ export const getChatResponse = async (history: ChatMessage[], message: string, f
 
 
 // --- Summarizer ---
-export const generateSummaryAndFlashcards = async (file: File): Promise<SummaryResult> => {
-    const filePart = await fileToGenerativePart(file);
+export const generateSummaryAndFlashcards = async (file: File, onProgress: (progress: number) => void): Promise<SummaryResult> => {
+    const filePart = await fileToGenerativePart(file, onProgress);
     const prompt = `Please analyze the content of this file and generate a comprehensive summary and a set of flashcards (question and answer format). Provide the output in a clean JSON format. The JSON object should have two keys: "summary" (string) and "flashcards" (an array of objects, each with "question" and "answer" keys). Focus on key concepts and definitions. The response language should be Arabic.`;
     
     const response = await ai.models.generateContent({
@@ -97,8 +119,8 @@ export const generateSummaryAndFlashcards = async (file: File): Promise<SummaryR
 
 
 // --- Test Generator ---
-export const generateTest = async (file: File): Promise<QuizQuestion[]> => {
-    const filePart = await fileToGenerativePart(file);
+export const generateTest = async (file: File, onProgress: (progress: number) => void): Promise<QuizQuestion[]> => {
+    const filePart = await fileToGenerativePart(file, onProgress);
     const prompt = `Based on the content of this file, generate a practice test with a mix of Multiple Choice Questions (MCQ) and Essay questions. Provide the output in a clean JSON array format. The language of questions must be Arabic.
     For each MCQ, the object should have "type" as "MCQ", "question", "options" (an array of 4 strings), and "correctAnswer" (a string).
     For each Essay question, the object should have "type" as "Essay" and "question".

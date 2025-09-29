@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { generateTest } from '../../services/geminiService';
 import { QuizQuestion, QuestionType, MCQQuestion } from '../../types';
@@ -6,9 +5,12 @@ import FeatureWrapper from '../common/FeatureWrapper';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { ClipboardList, UploadCloud, FileText, X } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import FileUploadProgress from '../common/FileUploadProgress';
 
 const SUPPORTED_TYPES = ['application/pdf', 'text/plain'];
 const SUPPORTED_TYPES_STRING = 'PDF, TXT';
+type UploadStatus = 'idle' | 'uploading' | 'generating' | 'error' | 'success';
+
 
 const TestGenerator: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -17,20 +19,37 @@ const TestGenerator: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [showResults, setShowResults] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
   const { addTest, addFile, t } = useApp();
+
+  const resetGenerationState = () => {
+    setQuestions(null);
+    setIsLoading(false);
+    setError(null);
+    setShowResults(false);
+    setAnswers({});
+    setUploadProgress(0);
+    setUploadStatus('idle');
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
+      resetGenerationState();
       const selectedFile = e.target.files[0];
       if (SUPPORTED_TYPES.includes(selectedFile.type)) {
         setFile(selectedFile);
-        setError(null);
       } else {
-        setError(t('feature.summarizer.error.unsupported', { fileTypes: SUPPORTED_TYPES_STRING }));
         setFile(null);
+        setError(t('feature.summarizer.error.unsupported', { fileTypes: SUPPORTED_TYPES_STRING }));
       }
     }
-    e.target.value = ''; // Reset file input
+    e.target.value = '';
+  };
+
+  const handleClearFile = () => {
+    setFile(null);
+    resetGenerationState();
   };
 
   const handleGenerate = async () => {
@@ -43,15 +62,25 @@ const TestGenerator: React.FC = () => {
     setQuestions(null);
     setShowResults(false);
     setAnswers({});
+    setUploadStatus('uploading');
 
     try {
-      const response = await generateTest(file);
+      const onProgress = (progress: number) => {
+        setUploadProgress(progress);
+        if (progress === 100) {
+          setUploadStatus('generating');
+        }
+      };
+
+      const response = await generateTest(file, onProgress);
       setQuestions(response);
+      setUploadStatus('success');
       addTest();
       const fileSize = (file.size / 1024).toFixed(2);
       addFile({ name: file.name, size: `${fileSize} KB`, type: 'test' });
     } catch (err) {
       setError(t('feature.testGenerator.error.generationFailed'));
+      setUploadStatus('error');
     } finally {
       setIsLoading(false);
     }
@@ -97,17 +126,27 @@ const TestGenerator: React.FC = () => {
                 <input type="file" className="hidden" onChange={handleFileChange} accept={SUPPORTED_TYPES.join(',')} />
             </label>
         ) : (
-            <div className="flex items-center justify-between w-full h-48 p-4 border-2 border-indigo-500 bg-indigo-50 rounded-lg">
-                <div className="flex items-center gap-4">
-                    <FileText className="w-10 h-10 text-indigo-600"/>
-                    <div>
-                        <p className="font-semibold text-slate-800">{file.name}</p>
-                        <p className="text-sm text-slate-500">{formatBytes(file.size)}</p>
+            <div className="p-4 border-2 border-indigo-500 bg-indigo-50 rounded-lg">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 min-w-0">
+                        <FileText className="w-10 h-10 text-indigo-600 flex-shrink-0"/>
+                        <div className="min-w-0">
+                            <p className="font-semibold text-slate-800 truncate">{file.name}</p>
+                            <p className="text-sm text-slate-500">{formatBytes(file.size)}</p>
+                        </div>
                     </div>
+                    <button onClick={handleClearFile} className="p-2 text-red-500 hover:bg-red-100 rounded-full transition-colors flex-shrink-0 ml-2">
+                        <X size={20} />
+                    </button>
                 </div>
-                <button onClick={() => setFile(null)} className="p-2 text-red-500 hover:bg-red-100 rounded-full transition-colors">
-                    <X size={20} />
-                </button>
+                 {(isLoading || uploadStatus === 'error') && uploadStatus !== 'idle' && (
+                    <FileUploadProgress 
+                        progress={uploadProgress}
+                        status={uploadStatus}
+                        fileName={file.name}
+                        t={t}
+                    />
+                )}
             </div>
         )}
         <div className="flex justify-end mt-4">
@@ -120,7 +159,7 @@ const TestGenerator: React.FC = () => {
             <span>{isLoading ? t('feature.testGenerator.button.loading') : t('feature.testGenerator.button.generate')}</span>
             </button>
         </div>
-        {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+        {error && !isLoading && <p className="text-red-500 mt-4 text-center">{error}</p>}
       </div>
 
       {questions && (
