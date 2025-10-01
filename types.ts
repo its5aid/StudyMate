@@ -1,6 +1,6 @@
 
 
-export type Feature = 'ai-assistant' | 'summarizer' | 'test-generator' | 'study-planner' | 'research-assistant';
+export type Feature = 'home-dashboard' | 'ai-assistant' | 'summarizer' | 'test-generator' | 'study-planner' | 'research-assistant';
 
 export type Page = 'dashboard' | 'profile';
 
@@ -73,4 +73,5 @@ export interface UserFile {
 export interface UserPlan {
     title: string;
     date: string;
+    data: StudyPlan;
 }

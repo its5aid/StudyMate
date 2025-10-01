@@ -43,8 +43,9 @@ const StudyPlanner: React.FC = () => {
       const response = await generateStudyPlan(validSubjects, time);
       setPlan(response);
       addPlan({
-          title: `${t('feature.studyPlanner.planTitle')} ${validSubjects.split(',')[0]}`,
-          date: new Date().toLocaleDateString('ar-EG')
+          title: `${t('feature.studyPlanner.planTitleFor')} ${validSubjects.split(',')[0]}`,
+          date: new Date().toLocaleDateString('ar-EG'),
+          data: response
       });
     } catch (err) {
       setError(t('feature.studyPlanner.error.generationFailed'));

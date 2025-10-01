@@ -3,16 +3,7 @@
 import React, { useState } from 'react';
 import { User, FileText, Calendar, BarChart2, Edit, Save, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-
-const StatCard: React.FC<{ icon: React.ReactNode; label: string; value: string | number }> = ({ icon, label, value }) => (
-  <div className="bg-white p-6 rounded-lg shadow-sm flex items-center space-x-4 rtl:space-x-reverse animate-fade-in-up">
-    <div className="bg-indigo-100 text-indigo-600 rounded-full p-3">{icon}</div>
-    <div>
-      <p className="text-sm text-slate-500">{label}</p>
-      <p className="text-2xl font-bold text-slate-800">{value}</p>
-    </div>
-  </div>
-);
+import StatCard from './common/StatCard';
 
 const Profile: React.FC = () => {
   const { user, userActivity, language, setLanguage, t, updateUser } = useApp();

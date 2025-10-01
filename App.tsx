@@ -7,13 +7,11 @@ import Profile from './components/Profile';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import { Page, Feature } from './types';
-import { BrainCircuit, BookOpen, ClipboardList, CalendarClock, Search, User } from 'lucide-react';
+import { Home, BrainCircuit, BookOpen, ClipboardList, CalendarClock, Search, User } from 'lucide-react';
 import { useApp } from './context/AppContext';
 
 const App: React.FC = () => {
-  const { isAuthenticated, logout, t } = useApp();
-  const [currentPage, setCurrentPage] = React.useState<Page>('dashboard');
-  const [activeFeature, setActiveFeature] = React.useState<Feature>('ai-assistant');
+  const { isAuthenticated, logout, t, currentPage, activeFeature, navigateTo } = useApp();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
 
@@ -22,6 +20,7 @@ const App: React.FC = () => {
   }
   
   const navItems: { id: Feature; name: string; icon: React.ReactNode; page: Page }[] = [
+    { id: 'home-dashboard', name: t('sidebar.dashboard'), icon: <Home size={22} />, page: 'dashboard' },
     { id: 'ai-assistant', name: t('sidebar.academicAssistant'), icon: <BrainCircuit size={22} />, page: 'dashboard' },
     { id: 'summarizer', name: t('sidebar.summarizer'), icon: <BookOpen size={22} />, page: 'dashboard' },
     { id: 'test-generator', name: t('sidebar.testGenerator'), icon: <ClipboardList size={22} />, page: 'dashboard' },
@@ -32,10 +31,7 @@ const App: React.FC = () => {
   const profileItem: { id: 'profile'; name: string; icon: React.ReactNode; page: Page } = { id: 'profile', name: t('sidebar.profile'), icon: <User size={22} />, page: 'profile' };
 
   const handleSetPage = (page: Page, feature?: Feature) => {
-    setCurrentPage(page);
-    if(feature) {
-      setActiveFeature(feature);
-    }
+    navigateTo(page, feature);
     setIsSidebarOpen(false); // Close sidebar on navigation
   }
   
@@ -44,6 +40,7 @@ const App: React.FC = () => {
       return profileItem.name;
     }
     const featureTitles: Record<Feature, string> = {
+      'home-dashboard': t('feature.dashboard.title'),
       'ai-assistant': t('feature.aiAssistant.title'),
       'summarizer': t('feature.summarizer.title'),
       'test-generator': t('feature.testGenerator.title'),

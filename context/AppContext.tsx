@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import { User, UserFile, UserPlan } from '../types';
+import { User, UserFile, UserPlan, Page, Feature } from '../types';
 
 interface UserActivity {
   files: UserFile[];
@@ -28,6 +28,9 @@ interface AppContextType {
   language: 'ar' | 'en';
   setLanguage: (lang: 'ar' | 'en') => void;
   t: (key: string, replacements?: Record<string, string | number>) => string;
+  currentPage: Page;
+  activeFeature: Feature;
+  navigateTo: (page: Page, feature?: Feature) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -56,7 +59,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [language, setLanguageState] = useState<'ar' | 'en'>('ar');
   const [translations, setTranslations] = useState<any>(null);
   const [isLoadingTranslations, setIsLoadingTranslations] = useState(true);
+  const [currentPage, setCurrentPage] = useState<Page>('dashboard');
+  const [activeFeature, setActiveFeature] = useState<Feature>('home-dashboard');
   
+  const navigateTo = (page: Page, feature?: Feature) => {
+    setCurrentPage(page);
+    if (feature) {
+      setActiveFeature(feature);
+    }
+  };
+
   useEffect(() => {
     const fetchTranslations = async () => {
         try {
@@ -235,6 +247,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     language,
     setLanguage,
     t,
+    currentPage,
+    activeFeature,
+    navigateTo,
   };
   
   if (isLoadingTranslations) {

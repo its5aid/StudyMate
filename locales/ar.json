@@ -40,6 +40,7 @@
   "login.error.unexpected": "حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى.",
   "login.success.passwordReset": "تم تغيير كلمة المرور بنجاح.",
   "login.success.codeSent.simulated": "لأغراض العرض، رمز استعادة كلمة المرور الخاص بك هو: {code}. الرجاء إدخاله أدناه.",
+  "sidebar.dashboard": "لوحة التحكم",
   "sidebar.academicAssistant": "المساعد الأكاديمي",
   "sidebar.summarizer": "ملخص المحاضرات",
   "sidebar.testGenerator": "مولد الاختبارات",
@@ -66,6 +67,21 @@
   "profile.save": "حفظ",
   "profile.cancel": "إلغاء",
   "profile.noMajor": "لم يتم تحديد التخصص",
+  "feature.dashboard.title": "🏠 لوحة التحكم الرئيسية",
+  "feature.dashboard.description": "نظرة عامة على نشاطك الدراسي وأدواتك.",
+  "dashboard.welcome": "أهلاً بعودتك، {name}!",
+  "dashboard.quickStats": "إحصائيات سريعة",
+  "dashboard.todaysPlan": "خطة اليوم",
+  "dashboard.noTasks": "لا توجد مهام لهذا اليوم.",
+  "dashboard.createPlanPrompt": "ليس لديك خطة؟",
+  "dashboard.createPlanLink": "أنشئ واحدة الآن",
+  "dashboard.recentFiles": "أحدث الملفات",
+  "dashboard.noFiles": "لم يتم رفع أي ملفات بعد.",
+  "dashboard.quickActions": "إجراءات سريعة",
+  "dashboard.action.summarize": "تلخيص ملف",
+  "dashboard.action.generateTest": "إنشاء اختبار",
+  "dashboard.action.planStudies": "تخطيط الدراسة",
+  "dashboard.action.startResearch": "بدء البحث",
   "feature.aiAssistant.title": "🧠 المساعد الأكاديمي",
   "feature.aiAssistant.description": "اطرح سؤالاً، أو ارفق ملفاً واسأل عن محتواه للحصول على إجابات دقيقة.",
   "feature.aiAssistant.startConversation": "ابدأ المحادثة بطرح سؤالك الأول.",
@@ -109,6 +125,7 @@
   "feature.studyPlanner.error.noInput": "الرجاء إدخال المواد الدراسية والوقت المتاح.",
   "feature.studyPlanner.error.generationFailed": "لم نتمكن من إنشاء الخطة. الرجاء المحاولة مرة أخرى.",
   "feature.studyPlanner.planTitle": "خطتك الدراسية الأسبوعية",
+  "feature.studyPlanner.planTitleFor": "خطة دراسية لـ",
   "feature.researchAssistant.title": "🔍 مساعد البحث",
   "feature.researchAssistant.description": "اكتب موضوع بحثك واحصل على ملخص ومصادر ومراجع أكاديمية موثوقة.",
   "feature.researchAssistant.placeholder": "مثال: تأثير الذكاء الاصطناعي على سوق العمل",
