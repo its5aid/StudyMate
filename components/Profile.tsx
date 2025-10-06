@@ -1,64 +1,108 @@
 
 
-import React, { useState } from 'react';
-import { User, FileText, Calendar, BarChart2, Edit, Save, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { User, FileText, Calendar, BarChart2, Info } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import StatCard from './common/StatCard';
 
+// Helper hook for intervals, as requested for auto-saving.
+function useInterval(callback: () => void, delay: number | null) {
+    const savedCallback = useRef<() => void>();
+
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        function tick() {
+            if (savedCallback.current) {
+                savedCallback.current();
+            }
+        }
+        if (delay !== null) {
+            let id = setInterval(tick, delay);
+            return () => clearInterval(id);
+        }
+    }, [delay]);
+}
+
 const Profile: React.FC = () => {
   const { user, userActivity, language, setLanguage, t, updateUser } = useApp();
-  const [isEditingMajor, setIsEditingMajor] = useState(false);
-  const [majorInput, setMajorInput] = useState(user?.major || '');
+  const [profileData, setProfileData] = useState({ name: '', major: '' });
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Load user data into local state when component mounts or user context changes
+  useEffect(() => {
+    if (user) {
+      setProfileData({
+        name: user.name,
+        major: user.major || ''
+      });
+    }
+  }, [user]);
+  
+  // Auto-save logic
+  useInterval(() => {
+    if (user && (profileData.name !== user.name || profileData.major !== (user.major || ''))) {
+      if (profileData.name.trim() !== '') {
+        setIsSaving(true);
+        updateUser({ name: profileData.name, major: profileData.major });
+        setTimeout(() => setIsSaving(false), 1500); // Visual feedback for saving
+      }
+    }
+  }, 5000);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setProfileData(prev => ({ ...prev, [name]: value }));
+  };
+
 
   if (!user) {
     return <div>{t('profile.loading')}</div>;
-  }
-
-  const handleSaveMajor = () => {
-    updateUser({ major: majorInput });
-    setIsEditingMajor(false);
-  };
-  
-  const handleCancelEdit = () => {
-    setMajorInput(user.major || '');
-    setIsEditingMajor(false);
   }
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-8 mb-8 animate-fade-in-up">
         <div className="flex flex-col md:flex-row items-center text-center md:text-right">
-          <div className="relative mb-4 md:mb-0 md:mr-8 rtl:md:mr-0 rtl:md:ml-8 flex-shrink-0">
+          <div className="relative mb-4 md:mb-0 md:mr-8 rtl:md:mr-0 rtl:ml-8 flex-shrink-0">
             <img
               className="h-24 w-24 rounded-full object-cover ring-4 ring-indigo-200"
-              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=6366f1&color=fff&font-size=0.4`}
+              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(profileData.name || user.name)}&background=6366f1&color=fff&font-size=0.4`}
               alt="User"
             />
              <div className="absolute bottom-0 right-0 bg-green-500 rounded-full w-5 h-5 border-2 border-white"></div>
           </div>
-          <div>
-            <h2 className="text-3xl font-bold text-slate-800">{user.name}</h2>
-            <p className="text-slate-500">{user.email}</p>
-             {isEditingMajor ? (
-              <div className="flex items-center gap-2 mt-2">
-                <input 
-                  type="text" 
-                  value={majorInput} 
-                  onChange={(e) => setMajorInput(e.target.value)} 
-                  className="w-full px-3 py-1 rounded-md bg-slate-100 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
-                  placeholder={t('login.major.placeholder')}
+          <div className="w-full">
+            <div className="mb-4">
+                 <label htmlFor="name" className="block text-sm font-medium text-slate-500 mb-1">{t('login.name')}</label>
+                 <input 
+                    id="name"
+                    name="name"
+                    type="text" 
+                    value={profileData.name} 
+                    onChange={handleInputChange} 
+                    className="w-full text-2xl font-bold text-center md:text-right text-slate-800 bg-slate-50 rounded-md p-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                    placeholder={t('login.name.placeholder')}
                 />
-                <button onClick={handleSaveMajor} className="p-1.5 text-green-600 hover:bg-green-100 rounded-full"><Save size={16}/></button>
-                <button onClick={handleCancelEdit} className="p-1.5 text-red-600 hover:bg-red-100 rounded-full"><X size={16}/></button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2 mt-1 justify-center md:justify-start">
-                <p className="text-sm text-slate-500">{user.major || t('profile.noMajor')}</p>
-                <button onClick={() => setIsEditingMajor(true)} className="text-slate-400 hover:text-indigo-600">
-                  <Edit size={14}/>
-                </button>
-              </div>
-            )}
+            </div>
+             <div className="mb-2">
+                 <label htmlFor="major" className="block text-sm font-medium text-slate-500 mb-1">{t('login.major')}</label>
+                 <input 
+                    id="major"
+                    name="major"
+                    type="text" 
+                    value={profileData.major} 
+                    onChange={handleInputChange} 
+                    className="w-full text-center md:text-right text-slate-600 bg-slate-50 rounded-md p-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                    placeholder={t('login.major.placeholder')}
+                />
+            </div>
+             <div className="h-5 mt-2 text-sm text-slate-400 flex items-center gap-2 justify-center md:justify-start">
+                <Info size={14} />
+                <span>{isSaving ? t('profile.saving') : t('profile.autoSaveMessage', {seconds: 5})}</span>
+            </div>
           </div>
         </div>
       </div>

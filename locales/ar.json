@@ -67,6 +67,8 @@
   "profile.save": "حفظ",
   "profile.cancel": "إلغاء",
   "profile.noMajor": "لم يتم تحديد التخصص",
+  "profile.autoSaveMessage": "يتم حفظ التغييرات تلقائيًا كل {seconds} ثوانٍ.",
+  "profile.saving": "جاري الحفظ...",
   "feature.dashboard.title": "🏠 لوحة التحكم الرئيسية",
   "feature.dashboard.description": "نظرة عامة على نشاطك الدراسي وأدواتك.",
   "dashboard.welcome": "أهلاً بعودتك، {name}!",

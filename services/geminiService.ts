@@ -1,18 +1,12 @@
+
 import { GoogleGenAI, Part, Type } from "@google/genai";
 import { SummaryResult, QuizQuestion, StudyPlan, ResearchSource, QuestionType, ChatMessage } from '../types';
 
-// ====================================================================================
-// WARNING: INSECURE FOR PRODUCTION
-// ====================================================================================
-// Storing an API key in client-side code is a major security risk.
-// Anyone can view this key and use it, which could lead to unexpected charges.
-// This is for local development and demonstration purposes ONLY.
-// For a real-world application, all API calls should be made from a secure backend server
-// where the API key can be kept secret.
-const API_KEY = 'AIzaSyBfJCdsoJilTzrTnpciRxjEHnkrRaLr-6Y';
-// ====================================================================================
+if (!process.env.API_KEY) {
+    throw new Error("API_KEY environment variable not set");
+}
 
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 const generativeModel = 'gemini-2.5-flash';
 
 

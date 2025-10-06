@@ -1,7 +1,5 @@
 
-
 import React from 'react';
-import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import Sidebar from './components/Sidebar';
@@ -11,14 +9,9 @@ import { Home, BrainCircuit, BookOpen, ClipboardList, CalendarClock, Search, Use
 import { useApp } from './context/AppContext';
 
 const App: React.FC = () => {
-  const { isAuthenticated, logout, t, currentPage, activeFeature, navigateTo } = useApp();
+  const { t, currentPage, activeFeature, navigateTo } = useApp();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
-
-  if (!isAuthenticated) {
-    return <Login />;
-  }
-  
   const navItems: { id: Feature; name: string; icon: React.ReactNode; page: Page }[] = [
     { id: 'home-dashboard', name: t('sidebar.dashboard'), icon: <Home size={22} />, page: 'dashboard' },
     { id: 'ai-assistant', name: t('sidebar.academicAssistant'), icon: <BrainCircuit size={22} />, page: 'dashboard' },
@@ -59,7 +52,6 @@ const App: React.FC = () => {
         setActiveItem={handleSetPage}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
-        logout={logout}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header onMenuClick={() => setIsSidebarOpen(true)} title={getTitle()} />

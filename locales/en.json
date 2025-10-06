@@ -67,6 +67,8 @@
   "profile.save": "Save",
   "profile.cancel": "Cancel",
   "profile.noMajor": "No major specified",
+  "profile.autoSaveMessage": "Changes auto-save every {seconds} seconds.",
+  "profile.saving": "Saving...",
   "feature.dashboard.title": "🏠 Main Dashboard",
   "feature.dashboard.description": "An overview of your academic activity and tools.",
   "dashboard.welcome": "Welcome back, {name}!",

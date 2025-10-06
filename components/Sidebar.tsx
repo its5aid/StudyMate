@@ -1,7 +1,6 @@
 
-
 import React, { useState } from 'react';
-import { BookMarked, ChevronLeft, LogOut } from 'lucide-react';
+import { BookMarked, ChevronLeft } from 'lucide-react';
 import { Page, Feature } from '../types';
 import { useApp } from '../context/AppContext';
 
@@ -19,10 +18,9 @@ interface SidebarProps {
   setActiveItem: (page: Page, feature?: Feature) => void;
   isSidebarOpen: boolean;
   setIsSidebarOpen: (isOpen: boolean) => void;
-  logout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ navItems, profileItem, activeItem, setActiveItem, isSidebarOpen, setIsSidebarOpen, logout }) => {
+const Sidebar: React.FC<SidebarProps> = ({ navItems, profileItem, activeItem, setActiveItem, isSidebarOpen, setIsSidebarOpen }) => {
     const [isExpanded, setIsExpanded] = useState(true);
     const { t } = useApp();
 
@@ -82,10 +80,6 @@ const Sidebar: React.FC<SidebarProps> = ({ navItems, profileItem, activeItem, se
 
         <div className="px-4 py-6 border-t border-slate-200 flex-shrink-0 space-y-3">
           <NavLink item={profileItem} />
-           <button onClick={logout} className="flex items-center w-full px-4 py-3 rounded-lg text-slate-500 hover:bg-red-100 hover:text-red-600 transition-all duration-200 transform active:scale-95 whitespace-nowrap">
-                <LogOut size={22} />
-                <span className={`mr-4 rtl:mr-0 rtl:ml-4 transition-all duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0 lg:opacity-0'}`}>{t('sidebar.logout')}</span>
-            </button>
         </div>
       </aside>
     </>
