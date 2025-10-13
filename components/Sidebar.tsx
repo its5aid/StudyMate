@@ -5,7 +5,7 @@ import { Page, Feature } from '../types';
 import { useApp } from '../context/AppContext';
 
 interface NavItem {
-    id: Feature | 'profile';
+    id: Feature | 'profile' | 'updates';
     name: string;
     icon: React.ReactNode;
     page: Page;

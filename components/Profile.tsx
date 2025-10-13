@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { User, FileText, Calendar, BarChart2, Info } from 'lucide-react';
 import { useApp } from '../context/AppContext';
@@ -160,6 +158,18 @@ const Profile: React.FC = () => {
           </ul>
         </div>
       </div>
+      
+      <div className="text-center mt-8 text-sm text-slate-400 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+        <a 
+          href="https://www.instagram.com/its5aid/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hover:text-indigo-600 transition-colors"
+        >
+          {t('profile.copyright')}
+        </a>
+      </div>
+
     </div>
   );
 };

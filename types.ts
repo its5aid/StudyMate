@@ -2,7 +2,7 @@
 
 export type Feature = 'home-dashboard' | 'ai-assistant' | 'summarizer' | 'test-generator' | 'study-planner' | 'research-assistant';
 
-export type Page = 'dashboard' | 'profile';
+export type Page = 'dashboard' | 'profile' | 'updates';
 
 export interface ChatMessage {
   role: 'user' | 'model';
@@ -74,4 +74,11 @@ export interface UserPlan {
     title: string;
     date: string;
     data: StudyPlan;
+}
+
+// FIX: Define the missing UserActivity type.
+export interface UserActivity {
+    files: UserFile[];
+    plans: UserPlan[];
+    tests: number;
 }

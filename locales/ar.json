@@ -1,8 +1,8 @@
-
 {
   "appName": "StudyMate",
-  "appSlogan": "مساعدك الدراسي الذكي",
+  "appSlogan": "",
   "login.title": "تسجيل الدخول",
+  "login.welcomeTitle": "مشرفانا ومنورانا",
   "signup.title": "إنشاء حساب جديد",
   "forgotPassword.title": "إعادة تعيين كلمة المرور",
   "forgotPassword.prompt": "أدخل بريدك الإلكتروني المسجل لإرسال رمز التأكيد.",
@@ -23,6 +23,7 @@
   "login.button.signup": "إنشاء حساب",
   "login.button.sendCode": "إرسال الرمز",
   "login.button.changePassword": "تغيير كلمة المرور",
+  "login.button.enter": "دخول",
   "login.forgotPasswordLink": "هل نسيت كلمة المرور؟",
   "login.noAccount": "ليس لديك حساب؟",
   "login.noAccount.link": "أنشئ حساباً",
@@ -49,6 +50,8 @@
   "sidebar.profile": "الملف الشخصي",
   "sidebar.logout": "تسجيل الخروج",
   "header.search": "ابحث...",
+  "page.updates.title": "تحديثات التطبيق",
+  "page.updates.description": "اكتشف الجديد والمحسّن في StudyMate.",
   "profile.pageTitle": "الملف الشخصي للمستخدم",
   "profile.activitySummary": "ملخص النشاط",
   "profile.uploadedFiles": "الملفات المرفوعة",
@@ -69,6 +72,7 @@
   "profile.noMajor": "لم يتم تحديد التخصص",
   "profile.autoSaveMessage": "يتم حفظ التغييرات تلقائيًا كل {seconds} ثوانٍ.",
   "profile.saving": "جاري الحفظ...",
+  "profile.copyright": "جميع الحقوق محفوظة لـ its5aid © 2025",
   "feature.dashboard.title": "🏠 لوحة التحكم الرئيسية",
   "feature.dashboard.description": "نظرة عامة على نشاطك الدراسي وأدواتك.",
   "dashboard.welcome": "أهلاً بعودتك، {name}!",
@@ -91,6 +95,9 @@
   "feature.aiAssistant.attachedFile": "الملف المرفق:",
   "feature.aiAssistant.fileError": "نوع الملف غير مدعوم. الرجاء رفع ملف من الأنواع التالية: PDF, TXT, JPG, PNG.",
   "feature.aiAssistant.error.generic": "عفواً، حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+  "feature.aiAssistant.welcome.title": "مرحباً {name}، كيف يمكنني مساعدتك اليوم؟",
+  "feature.aiAssistant.attachFileLabel": "إرفاق ملف",
+  "feature.aiAssistant.sendLabel": "إرسال",
   "feature.summarizer.title": "📚 ملخّص المحاضرات",
   "feature.summarizer.description": "ارفع ملفاتك ({fileTypes}) للحصول على ملخص شامل وبطاقات فلاش للمذاكرة.",
   "feature.summarizer.upload.click": "انقر للرفع",

@@ -1,14 +1,10 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import { User, UserFile, UserPlan, Page, Feature } from '../types';
-
-interface UserActivity {
-  files: UserFile[];
-  plans: UserPlan[];
-  tests: number;
-}
+// FIX: Import the missing UserActivity type.
+import { User, UserFile, UserPlan, Page, Feature, UserActivity } from '../types';
+import Login from '../components/Login';
 
 interface AppContextType {
-  user: User;
+  user: User | null;
   updateUser: (updatedData: Partial<User>) => void;
   userActivity: UserActivity;
   addFile: (file: UserFile) => void;
@@ -20,11 +16,7 @@ interface AppContextType {
   currentPage: Page;
   activeFeature: Feature;
   navigateTo: (page: Page, feature?: Feature) => void;
-  // FIX: Add missing authentication functions to the context type.
-  login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
-  signup: (name: string, email: string, password: string, major?: string) => Promise<{ success: boolean; message: string }>;
-  checkEmailExists: (email: string) => Promise<boolean>;
-  resetPassword: (email: string, newPassword: string) => Promise<{ success: boolean; message: string }>;
+  handleLogin: (name: string, major: string) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -79,29 +71,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             const storedUser = localStorage.getItem(USER_DATA_KEY);
             if (storedUser) {
                 setUser(JSON.parse(storedUser));
-            } else {
-                const defaultUser: User = {
-                    name: 'طالب',
-                    email: 'student@studymate.app',
-                    major: 'غير محدد',
-                };
-                localStorage.setItem(USER_DATA_KEY, JSON.stringify(defaultUser));
-                setUser(defaultUser);
-            }
-
-            const storedActivity = localStorage.getItem(ACTIVITY_STORAGE_KEY);
-            if (storedActivity) {
-                setUserActivity(JSON.parse(storedActivity));
+                const storedActivity = localStorage.getItem(ACTIVITY_STORAGE_KEY);
+                if (storedActivity) {
+                    setUserActivity(JSON.parse(storedActivity));
+                }
             }
         } catch (error) {
             console.error("Failed to load translations or user data", error);
             setTranslations({ ar: {}, en: {} }); // Fallback to avoid crash
-            const defaultUser: User = {
-                name: 'طالب',
-                email: 'student@studymate.app',
-                major: 'غير محدد',
-            };
-            setUser(defaultUser);
         } finally {
             setIsAppLoading(false);
         }
@@ -116,6 +93,19 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         translation = translation.replace(`{${placeholder}}`, String(replacements[placeholder]));
     });
     return translation;
+  };
+  
+  const handleLogin = (name: string, major: string) => {
+    const newUser: User = {
+      name,
+      email: `${name.toLowerCase().replace(/\s/g, '.')}@studymate.app`, // Dummy email
+      major: major || t('profile.noMajor')
+    };
+    localStorage.setItem(USER_DATA_KEY, JSON.stringify(newUser));
+    // Reset activity for the new user
+    localStorage.removeItem(ACTIVITY_STORAGE_KEY);
+    setUser(newUser);
+    setUserActivity({ files: [], plans: [], tests: 0 });
   };
 
   useEffect(() => {
@@ -154,55 +144,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     saveActivity(newActivity);
   };
 
-  // FIX: Implement mock authentication functions.
-  const login = async (email: string, password: string): Promise<{ success: boolean; message: string; }> => {
-    const storedUser = localStorage.getItem(USER_DATA_KEY);
-    if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        if (parsedUser.email === email) {
-            // In a real app, you'd check a hashed password. This is a mock.
-            setUser(parsedUser);
-            return { success: true, message: t('login.success.login') };
-        }
-    }
-    return { success: false, message: t('login.error.credentials') };
-  };
-
-  const signup = async (name: string, email: string, password: string, major: string = ''): Promise<{ success: boolean; message: string; }> => {
-    const storedUser = localStorage.getItem(USER_DATA_KEY);
-    if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        if (parsedUser.email === email) {
-            return { success: false, message: t('login.error.emailExists') };
-        }
-    }
-    const newUser: User = { name, email, major };
-    localStorage.setItem(USER_DATA_KEY, JSON.stringify(newUser));
-    setUser(newUser);
-    return { success: true, message: t('login.success.signup') };
-  };
-
-  const checkEmailExists = async (email: string): Promise<boolean> => {
-      const storedUser = localStorage.getItem(USER_DATA_KEY);
-      if (storedUser) {
-          return JSON.parse(storedUser).email === email;
-      }
-      return false;
-  };
-
-  const resetPassword = async (email: string, newPassword: string): Promise<{ success: boolean; message: string; }> => {
-      const storedUser = localStorage.getItem(USER_DATA_KEY);
-      if (storedUser) {
-          const parsedUser = JSON.parse(storedUser);
-          if (parsedUser.email === email) {
-              // In a real app, you'd update the user's password. This is a mock.
-              return { success: true, message: t('login.success.passwordReset') };
-          }
-      }
-      return { success: false, message: t('login.error.emailNotFound') };
-  };
-
-  if (isAppLoading || !user) {
+  if (isAppLoading) {
     return <AppLoading />;
   }
 
@@ -219,14 +161,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     currentPage,
     activeFeature,
     navigateTo,
-    // FIX: Add mock functions to the context value.
-    login,
-    signup,
-    checkEmailExists,
-    resetPassword,
+    handleLogin,
   };
   
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>
+        {user ? children : <Login />}
+    </AppContext.Provider>
+  );
 };
 
 export const useApp = (): AppContextType => {

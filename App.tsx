@@ -2,6 +2,7 @@
 import React from 'react';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
+import Updates from './components/Updates';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import { Page, Feature } from './types';
@@ -32,6 +33,9 @@ const App: React.FC = () => {
     if (currentPage === 'profile') {
       return profileItem.name;
     }
+    if (currentPage === 'updates') {
+      return t('page.updates.title');
+    }
     const featureTitles: Record<Feature, string> = {
       'home-dashboard': t('feature.dashboard.title'),
       'ai-assistant': t('feature.aiAssistant.title'),
@@ -48,16 +52,17 @@ const App: React.FC = () => {
       <Sidebar 
         navItems={navItems}
         profileItem={profileItem}
-        activeItem={currentPage === 'dashboard' ? activeFeature : 'profile'}
+        activeItem={currentPage === 'dashboard' ? activeFeature : currentPage}
         setActiveItem={handleSetPage}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header onMenuClick={() => setIsSidebarOpen(true)} title={getTitle()} />
-        <main className="flex-1 bg-slate-100 p-4 sm:p-6 md:p-8 flex flex-col overflow-y-auto">
+        <main className={`flex-1 bg-slate-100 p-4 sm:p-6 md:p-8 flex flex-col ${currentPage === 'dashboard' && activeFeature === 'ai-assistant' ? 'overflow-hidden' : 'overflow-y-auto'}`}>
           {currentPage === 'dashboard' && <Dashboard activeFeature={activeFeature} />}
           {currentPage === 'profile' && <Profile />}
+          {currentPage === 'updates' && <Updates />}
         </main>
       </div>
     </div>
